@@ -1,0 +1,38 @@
+<!-- 
+	These scripts are added at the bottom of body so that the DOM can be loaded 
+	into memory first and then jQuery doesn't have to wait on ready states.
+-->
+<script src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script src="js/jquery.include.js"></script>
+<script>
+	$(function(){
+		$.extend($, {
+			config: {
+				current_page: "<?=$CURRENT_PAGE;?>",
+				paths: {
+					javascript: "js/",
+					library: "lib/",
+					css: "style/",
+					templates: "templates/",
+					pagejs: "js/<?=$CURRENT_PAGE;?>/",
+				},
+				thirdPartyPlugins: {
+					"foundation": {
+						type: "framework"
+					},
+					"spin": {
+						type: "jQuery"
+					},
+					"later": {
+						type: "jQuery"
+					}
+				},
+			}
+		});
+		$.include($.config.paths['javascript'] + "/jquery.common.js");
+		$.include($.config.paths['javascript'] + "/jquery.required.js");
+	});
+</script>
+<?php 
+	include("template/index/*"); // All handlebar templates
+?>
